@@ -16,16 +16,16 @@ export const sculptures = [
     id: 'rooster', number: '02', name: 'The Rooster',
     line: 'A character all its own.',
     image: archivedAsset('3d Cock knocker.png'),
-    original: 'https://raw.githubusercontent.com/Rnocek14/Door-Knockers/main/3d%20Cock%20knocker.png',
+    original: 'https://d2ol7oe51mr4n9.cloudfront.net/user_3JKXANr2UOgVCTXeHeEY7LLgXbS/7d23e374-bce7-4648-bc10-79a3fd944cd6.jpg',
     model: null,
-    originalLabel: 'Rooster bronze concept study'
+    originalLabel: 'Original hand-sculpted rooster wax relief'
   },
   {
     id: 'dragon', number: '03', name: 'The Dragon',
     line: 'Myth, made tangible.',
     image: archivedAsset('3d dragon knocker.png'),
-    original: archivedAsset('3d dragon knocker.png'),
+    original: 'https://d2ol7oe51mr4n9.cloudfront.net/user_3JKXANr2UOgVCTXeHeEY7LLgXbS/ed3c7138-b461-47c8-95c9-99a7002dc449.jpg',
     model: null,
-    originalLabel: 'Dragon bronze concept study'
+    originalLabel: 'Original hand-sculpted dragon wax relief'
   }
 ];
