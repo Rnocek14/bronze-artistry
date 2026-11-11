@@ -20,11 +20,23 @@ function Sculpture({ item, onOpen }) {
   useEffect(() => {
     if (!item.model || !viewer.current || failed) return undefined;
     const element = viewer.current;
-    const success = () => setLoaded(true);
+    const success = () => {
+      try {
+        for (const material of (element.model?.materials || [])) {
+          const pbr = material.pbrMetallicRoughness;
+          pbr?.setBaseColorFactor([0.52, 0.32, 0.15, 1]);
+          pbr?.setMetallicFactor(0.96);
+          pbr?.setRoughnessFactor(0.34);
+        }
+      } catch (error) {
+        console.warn('Could not apply digital bronze material', error);
+      }
+      setLoaded(true);
+    };
     const failure = () => setFailed(true);
     element.addEventListener('load', success);
     element.addEventListener('error', failure);
-    if (element.loaded) setLoaded(true);
+    if (element.loaded) success();
     const deadline = window.setTimeout(() => {
       if (!element.loaded) setFailed(true);
     }, 30000);
@@ -35,18 +47,6 @@ function Sculpture({ item, onOpen }) {
     };
   }, [item.model, failed]);
 
-  const onModelLoad = () => {
-    try {
-      const materials = viewer.current?.model?.materials || [];
-      for (const material of materials) {
-        const pbr = material.pbrMetallicRoughness;
-        pbr?.setBaseColorFactor([0.52, 0.32, 0.15, 1]);
-        pbr?.setMetallicFactor(0.96);
-        pbr?.setRoughnessFactor(0.34);
-      }
-    } catch (error) { console.warn('Bronze finish could not be applied:', error); }
-    setLoaded(true);
-  };
 
   return (
     <article className="sculpture" aria-labelledby={'name-' + item.id}>
@@ -70,8 +70,6 @@ function Sculpture({ item, onOpen }) {
               environment-image="neutral"
               loading="eager"
               reveal="auto"
-              onLoad={onModelLoad}
-              onError={() => setFailed(true)}
             />
             <span className="stage-label">{loaded ? (item.experimental ? 'EARLY 3D STUDY · DRAG TO ROTATE' : 'DRAG TO ROTATE · LIVE 3D') : 'PREPARING THE 3D SCULPTURE'}</span>
           </>
