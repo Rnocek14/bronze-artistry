@@ -15,6 +15,19 @@ function Sculpture({ item, onOpen }) {
     return () => media.removeEventListener('change', onChange);
   }, [item.model]);
 
+  const onModelLoad = () => {
+    try {
+      const materials = viewer.current?.model?.materials || [];
+      for (const material of materials) {
+        const pbr = material.pbrMetallicRoughness;
+        pbr?.setBaseColorFactor([0.52, 0.32, 0.15, 1]);
+        pbr?.setMetallicFactor(0.96);
+        pbr?.setRoughnessFactor(0.34);
+      }
+    } catch (error) { console.warn('Bronze finish could not be applied:', error); }
+    setLoaded(true);
+  };
+
   return (
     <article className="sculpture" aria-labelledby={'name-' + item.id}>
       <div className="sculpture-stage">
@@ -28,7 +41,7 @@ function Sculpture({ item, onOpen }) {
               poster={item.image}
               alt="Rotatable 3D reconstruction of the original handmade bull door knocker"
               camera-controls
-              auto-rotate={!reduced}
+              auto-rotate={reduced ? undefined : ''}
               auto-rotate-delay="0"
               rotation-per-second="13deg"
               interaction-prompt="none"
@@ -37,7 +50,7 @@ function Sculpture({ item, onOpen }) {
               environment-image="neutral"
               loading="eager"
               reveal="auto"
-              onLoad={() => setLoaded(true)}
+              onLoad={onModelLoad}
               onError={() => setFailed(true)}
             />
             <span className="stage-label">{loaded ? 'DRAG TO ROTATE · LIVE 3D' : 'PREPARING THE 3D SCULPTURE'}</span>
