@@ -39,7 +39,7 @@ function Sculpture({ item, onOpen }) {
               ref={viewer}
               src={item.model}
               poster={item.image}
-              alt="Rotatable 3D reconstruction of the original handmade bull door knocker"
+              alt={'Rotatable digital 3D reconstruction of ' + item.name + ' sculpture'}
               camera-controls
               auto-rotate={reduced ? undefined : ''}
               auto-rotate-delay="0"
@@ -53,7 +53,7 @@ function Sculpture({ item, onOpen }) {
               onLoad={onModelLoad}
               onError={() => setFailed(true)}
             />
-            <span className="stage-label">{loaded ? 'DRAG TO ROTATE · LIVE 3D' : 'PREPARING THE 3D SCULPTURE'}</span>
+            <span className="stage-label">{loaded ? (item.experimental ? 'EARLY 3D STUDY · DRAG TO ROTATE' : 'DRAG TO ROTATE · LIVE 3D') : 'PREPARING THE 3D SCULPTURE'}</span>
           </>
         ) : (
           <>
@@ -90,7 +90,7 @@ function Detail({ item, onClose }) {
         <img src={item.original} alt={item.originalLabel} />
         <div className="modal-copy"><span className="overline">THE COLLECTION / {item.number}</span><h2>{item.name}</h2>
           <p>{item.line} These sculptures began as original handmade artworks. Bronze finishes shown are digital visualizations; physical castings have not yet been made.</p>
-          <p className="fine">The Bull includes an exploratory 3D reconstruction based on one photograph. Its shape and mounting details still need independent review.</p>
+          <p className="fine">{item.experimental ? "This is an experimental single-photo 3D study. Back, side and mounting geometry may differ substantially from the handmade original." : "The Bull includes an exploratory 3D reconstruction based on one photograph. Its shape and mounting details still need independent review."}</p>
           <a href="#process" onClick={onClose}>See the making ↓</a>
         </div>
       </section>
@@ -116,7 +116,7 @@ export default function App() {
           <div className="sculpture-grid">
             {sculptures.map(item => <Sculpture key={item.id} item={item} onOpen={setActive} />)}
           </div>
-          <div className="opening-foot"><span>HAND SCULPTED · BRONZE STUDIES</span><a href="#process">BEHIND THE WORK <span>↓</span></a></div>
+          <div className="opening-foot"><span>ORIGINAL SCULPTURES · EXPERIMENTAL 3D RECONSTRUCTIONS</span><a href="#process">BEHIND THE WORK <span>↓</span></a></div>
         </section>
         <section className="process" id="process">
           <div className="process-heading"><span className="overline">BEFORE THE BRONZE</span><h2>Made by hand.</h2><p>The original sculptures exist in clay and wax. Every curve, horn, feather and scale was made by an artist—not invented for a product rendering.</p></div>
@@ -126,7 +126,7 @@ export default function App() {
             <figure><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_3JKXANr2UOgVCTXeHeEY7LLgXbS/ed3c7138-b461-47c8-95c9-99a7002dc449.jpg" alt="Original dragon wax sculpture with scales and swept-back horns" loading="lazy"/><figcaption>03 / THE DRAGON · ORIGINAL WAX WORK</figcaption></figure>
           </div>
         </section>
-        <section className="studio" id="studio"><span className="overline">THE ART OF CASTING</span><h2>From sculpture<br/><em>to bronze.</em></h2><p>A closer look at the original forms and the lost-wax casting process. The foundry film and the Rooster and Dragon 3D reconstructions will follow once those assets are ready.</p><a href="#collection">Return to the collection ↑</a></section>
+        <section className="studio" id="studio"><span className="overline">THE ART OF CASTING</span><h2>From sculpture<br/><em>to bronze.</em></h2><p>A closer look at the original forms and the lost-wax casting process. The foundry film is still being developed. The 3D reconstructions are visual studies, not verified scans or production-ready castings.</p><a href="#collection">Return to the collection ↑</a></section>
       </main>
       <footer><a className="brand" href="#top">BRONZE <span>ARTISTRY</span></a><span>ART AT THE THRESHOLD</span><span>{new Date().getFullYear()}</span></footer>
       {active && <Detail item={active} onClose={() => setActive(null)} />}
