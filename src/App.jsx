@@ -122,8 +122,8 @@ export default function App() {
           <div className="process-heading"><span className="overline">BEFORE THE BRONZE</span><h2>Made by hand.</h2><p>The original sculptures exist in clay and wax. Every curve, horn, feather and scale was made by an artist—not invented for a product rendering.</p></div>
           <div className="photo-grid">
             <figure><img src="https://raw.githubusercontent.com/Rnocek14/Door-Knockers/main/First%20Bull%20Updated.jpg" alt="Handmade bull head sculpture in clay" loading="lazy"/><figcaption>01 / THE BULL · ORIGINAL WORK</figcaption></figure>
-            <figure><img src="https://raw.githubusercontent.com/Rnocek14/Door-Knockers/main/Second%20Bull.jpg" alt="Bull sculpture in progress" loading="lazy"/><figcaption>02 / MOLD & PROCESS</figcaption></figure>
-            <figure><img src="https://raw.githubusercontent.com/Rnocek14/Door-Knockers/main/Third%20Bull.jpg" alt="Bull sculpture wax-stage reference" loading="lazy"/><figcaption>03 / WAX STUDY</figcaption></figure>
+            <figure><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_3JKXANr2UOgVCTXeHeEY7LLgXbS/7d23e374-bce7-4648-bc10-79a3fd944cd6.jpg" alt="Original hand-sculpted rooster head with curved beak and oval backplate" loading="lazy"/><figcaption>02 / THE ROOSTER · ORIGINAL WAX WORK</figcaption></figure>
+            <figure><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_3JKXANr2UOgVCTXeHeEY7LLgXbS/ed3c7138-b461-47c8-95c9-99a7002dc449.jpg" alt="Original dragon wax sculpture with scales and swept-back horns" loading="lazy"/><figcaption>03 / THE DRAGON · ORIGINAL WAX WORK</figcaption></figure>
           </div>
         </section>
         <section className="studio" id="studio"><span className="overline">THE ART OF CASTING</span><h2>From sculpture<br/><em>to bronze.</em></h2><p>A closer look at the original forms and the lost-wax casting process. The foundry film and the Rooster and Dragon 3D reconstructions will follow once those assets are ready.</p><a href="#collection">Return to the collection ↑</a></section>
