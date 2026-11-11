@@ -1,9 +1,10 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  base: process.env.GITHUB_PAGES === 'true' ? '/bronze-artistry/' : '/',
+  // Relative build assets work on GitHub Pages, branch previews and subpaths.
+  base: './',
   build: {
     target: 'es2022',
-    cssCodeSplit: true,
-  },
+    cssCodeSplit: true
+  }
 });
