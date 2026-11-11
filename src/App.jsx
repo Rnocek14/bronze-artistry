@@ -31,6 +31,9 @@ function Sculpture({ item, onOpen }) {
       } catch (error) {
         console.warn('Could not apply digital bronze material', error);
       }
+      // The model stays behind its internal poster until it is ready.
+      // Never show the WebGL model above a separate static image.
+      element.dismissPoster?.();
       setLoaded(true);
     };
     const failure = () => setFailed(true);
@@ -54,7 +57,6 @@ function Sculpture({ item, onOpen }) {
         <span className="piece-number">{item.number} / 03</span>
         {item.model && !failed ? (
           <>
-            {!loaded && <img className="stage-poster" src={item.image} alt="" aria-hidden="true" />}
             <model-viewer
               ref={viewer}
               src={item.model}
@@ -69,7 +71,7 @@ function Sculpture({ item, onOpen }) {
               exposure="1.1"
               environment-image="neutral"
               loading="eager"
-              reveal="auto"
+              reveal="manual"
             />
             <span className="stage-label">{loaded ? (item.experimental ? 'EARLY 3D STUDY · DRAG TO ROTATE' : 'DRAG TO ROTATE · LIVE 3D') : 'PREPARING THE 3D SCULPTURE'}</span>
           </>
