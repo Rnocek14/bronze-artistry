@@ -15,6 +15,26 @@ function Sculpture({ item, onOpen }) {
     return () => media.removeEventListener('change', onChange);
   }, [item.model]);
 
+  // Native custom-element events are more reliable than framework event bridges.
+  // Avoid leaving a perpetual loading label if a browser cannot decode a GLB.
+  useEffect(() => {
+    if (!item.model || !viewer.current || failed) return undefined;
+    const element = viewer.current;
+    const success = () => setLoaded(true);
+    const failure = () => setFailed(true);
+    element.addEventListener('load', success);
+    element.addEventListener('error', failure);
+    if (element.loaded) setLoaded(true);
+    const deadline = window.setTimeout(() => {
+      if (!element.loaded) setFailed(true);
+    }, 30000);
+    return () => {
+      window.clearTimeout(deadline);
+      element.removeEventListener('load', success);
+      element.removeEventListener('error', failure);
+    };
+  }, [item.model, failed]);
+
   const onModelLoad = () => {
     try {
       const materials = viewer.current?.model?.materials || [];
